@@ -59,14 +59,43 @@ func Calculate(input string, result *float64) {
 }
 
 // SaveAndCal save the value and start new calculation
-func SaveAndCal() {
+func SaveAndCal(input string, result *float64, storage *[]float64) {
+	num := *result
+	*storage = append(*storage, num)
+	*result = 0
 
+	if i := strings.IndexAny(input, o); i == -1 {
+		fmt.Println("unvalid input(no operator)")
+	} else {
+		num1, _ := strconv.ParseFloat(input[:i], 64)
+		num2, _ := strconv.ParseFloat(input[i+1:len(input)-1], 64)
+		switch op := string(input[i]); op {
+		case "+":
+			*result = num1 + num2
+		case "-":
+			*result = num1 - num2
+		case "*":
+			*result = num1 * num2
+		case "/":
+			*result = num1 / num2
+		case "^":
+			*result = math.Pow(num1, num2)
+		}
+	}
+
+	return
+}
+
+//Display will display result of calculate and storage space
+func Display() {
 	return
 }
 
 func main() {
 
 	kbReader := bufio.NewReader(os.Stdin)
+	storage := make([]float64, 0)
+	// st_ind := 0
 	var op string
 	var num1, num2 float64
 	var result float64
@@ -94,11 +123,20 @@ func main() {
 		for {
 			input, _ = kbReader.ReadString('\n')        // 엔터키가 나올때까지 입력을 받음.
 			input = strings.Replace(input, " ", "", -1) // input에서 모든 공백 제거
+			if o := StartsWithOp(input); o {
+				Calculate(input, &result)
+				fmt.Println("storage :", storage)
+				fmt.Println(result)
+			} else {
+				SaveAndCal(input, &result, &storage)
+				fmt.Println("storage :", storage)
+				fmt.Println(result)
+			}
+
 			if string(input[0]) == "x" {
+				fmt.Println("Turn off")
 				break
 			}
-			Calculate(input, &result)
-			fmt.Println(result)
 		}
 
 	}
