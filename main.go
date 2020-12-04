@@ -87,7 +87,20 @@ func SaveAndCal(input string, result *float64, storage *[]float64) {
 }
 
 //Display will display result of calculate and storage space
-func Display() {
+func Display(storage []float64, result float64, input string) {
+
+	fmt.Print("\033[H\033[2J")
+	fmt.Println("=====================================")
+	fmt.Println("|             GOCULATOR             |")
+	fmt.Println("=====================================")
+	fmt.Println("|storage|                           |")
+	fmt.Println(storage)
+	fmt.Println("=====================================")
+	fmt.Println("|Calculator|")
+	fmt.Printf("%s", input)
+	fmt.Println("=", result)
+	fmt.Println("(enter 'x' to exit)")
+
 	return
 }
 
@@ -99,7 +112,9 @@ func main() {
 	var op string
 	var num1, num2 float64
 	var result float64
-	input, _ := kbReader.ReadString('\n')       // 엔터키가 나올때까지 입력을 받음.
+	var input string
+	Display(storage, result, input)
+	input, _ = kbReader.ReadString('\n')        // 엔터키가 나올때까지 입력을 받음.
 	input = strings.Replace(input, " ", "", -1) // input에서 모든 공백 제거
 
 	if i := strings.IndexAny(input, o); i == -1 {
@@ -119,21 +134,19 @@ func main() {
 		case "^":
 			result = math.Pow(num1, num2)
 		}
-		fmt.Println(num1, op, num2, "=", result)
+		Display(storage, result, input)
 		for {
 			input, _ = kbReader.ReadString('\n')        // 엔터키가 나올때까지 입력을 받음.
 			input = strings.Replace(input, " ", "", -1) // input에서 모든 공백 제거
 			if o := StartsWithOp(input); o {
 				Calculate(input, &result)
-				fmt.Println("storage :", storage)
-				fmt.Println(result)
+				Display(storage, result, input)
 			} else {
 				SaveAndCal(input, &result, &storage)
-				fmt.Println("storage :", storage)
-				fmt.Println(result)
+				Display(storage, result, input)
 			}
-
 			if string(input[0]) == "x" {
+				fmt.Print("\033[H\033[2J")
 				fmt.Println("Turn off")
 				break
 			}
