@@ -63,9 +63,9 @@ func SaveAndCal(input string, result *float64, storage *[]float64) {
 	num := *result
 	*storage = append(*storage, num)
 	*result = 0
-
 	if i := strings.IndexAny(input, o); i == -1 {
 		fmt.Println("unvalid input(no operator)")
+		// input이 올바르지 않을때 result=0이 그대로 반환된다.
 	} else {
 		num1, _ := strconv.ParseFloat(input[:i], 64)
 		num2, _ := strconv.ParseFloat(input[i+1:len(input)-1], 64)
@@ -104,6 +104,21 @@ func Display(storage []float64, result float64, input string) {
 	return
 }
 
+// CheckCallStorage convert input value if it contains storage
+func CheckCallStorage(input string, storage []float64) string {
+	for {
+		ind := strings.Index(input, "s[")
+		if ind == -1 {
+			break
+		}
+		num, _ := strconv.ParseInt(input[ind+2:ind+3], 10, 32)
+		s := fmt.Sprintf("%f", storage[num])
+		input = strings.Replace(input, input[ind:ind+4], s, 1)
+	}
+
+	return input
+}
+
 func main() {
 
 	kbReader := bufio.NewReader(os.Stdin)
@@ -116,6 +131,7 @@ func main() {
 	Display(storage, result, input)
 	input, _ = kbReader.ReadString('\n')        // 엔터키가 나올때까지 입력을 받음.
 	input = strings.Replace(input, " ", "", -1) // input에서 모든 공백 제거
+	input = CheckCallStorage(input, storage)    // 저장된 값을 불러오는지 체크하고 인풋을 그에맞게 변경해줌.
 
 	if i := strings.IndexAny(input, o); i == -1 {
 		fmt.Println("unvalid input(no operator)")
@@ -136,9 +152,10 @@ func main() {
 		}
 		Display(storage, result, input)
 		for {
-			input, _ = kbReader.ReadString('\n')        // 엔터키가 나올때까지 입력을 받음.
-			input = strings.Replace(input, " ", "", -1) // input에서 모든 공백 제거
-			if o := StartsWithOp(input); o {
+			input, _ = kbReader.ReadString('\n')
+			input = strings.Replace(input, " ", "", -1)
+			input = CheckCallStorage(input, storage)
+			if so := StartsWithOp(input); so {
 				Calculate(input, &result)
 				Display(storage, result, input)
 			} else {
@@ -151,7 +168,6 @@ func main() {
 				break
 			}
 		}
-
 	}
 
 }
