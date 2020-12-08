@@ -19,9 +19,9 @@
 		<img src ="https://github.com/Wook-2/CS_Summary/blob/main/image/1.gif?raw=true" width="250px"></img>
 		- Next, 2 ways to type
 			1. number + operator + number ex) "20 * 5"<br> It will save recent result in storage<br>
-			<img src="https://github.com/Wook-2/CS_Summary/blob/main/image/2.gif?raw=true" width="250px"></img>
-			2. operator + number ex) "- 3"<br>
 			<img src="https://github.com/Wook-2/CS_Summary/blob/main/image/3.gif?raw=true" width="250px"></img>
+			2. operator + number ex) "- 3"<br>
+			<img src="https://github.com/Wook-2/CS_Summary/blob/main/image/2.gif?raw=true" width="250px"></img>
 		- You can load saved number by typing like "s[0] + 20" or "- s[1]"<br>
 		<img src="https://github.com/Wook-2/CS_Summary/blob/main/image/4.gif?raw=true" width="250px"></img>
 
