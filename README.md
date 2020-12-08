@@ -13,13 +13,17 @@
 	`git clone https://github.com/Wook-2/Goculator.git`
 	2. Run main.go<br>
 	`go run main.go`
-	3. you can see like below<br>
-	<img src ="https://github.com/Wook-2/CS_Summary/blob/main/image/goculator.PNG?raw=true" width = "300px"></img>
-		- First, you have to type full numerical expression like "10 + 20"
+	3. Now Goculator is On.<br>
+	<img src ="https://github.com/Wook-2/CS_Summary/blob/main/image/goculator.PNG?raw=true" width = "250px"></img>
+		- First, you have to type full numerical expression like "10 + 20"<br>
+		<img src ="https://github.com/Wook-2/CS_Summary/blob/main/image/1.gif?raw=true" width="250px"></img>
 		- Next, 2 ways to type
-			1. number + operator + number ex) "20 * 5"<br> It will save recent result in storage
-			2. operator + number ex) "- 3"
-		- You can load saved number by typing like "s[0] + 20" or "- s[1]"
+			1. number + operator + number ex) "20 * 5"<br> It will save recent result in storage<br>
+			<img src="https://github.com/Wook-2/CS_Summary/blob/main/image/2.gif?raw=true" width="250px"></img>
+			2. operator + number ex) "- 3"<br>
+			<img src="https://github.com/Wook-2/CS_Summary/blob/main/image/3.gif?raw=true" width="250px"></img>
+		- You can load saved number by typing like "s[0] + 20" or "- s[1]"<br>
+		<img src="https://github.com/Wook-2/CS_Summary/blob/main/image/4.gif?raw=true" width="250px"></img>
 
 ### Will be update
 - [ ] Log, 삼각함수, 나머지연산 기능 추가
