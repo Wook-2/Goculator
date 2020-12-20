@@ -6,18 +6,18 @@ import (
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/j1mmyson/Goculator/internal/display"
 )
 
 // IsStartWithOp check if the input starts with operator
 func IsStartWithOp(input string) bool {
-	a := strings.HasPrefix(input, "*")
-	b := strings.HasPrefix(input, "+")
-	c := strings.HasPrefix(input, "-")
-	d := strings.HasPrefix(input, "/")
-	e := strings.HasPrefix(input, "^")
+	op := []string{"*", "+", "-", "/", "%", "^"}
 
-	if a || b || c || d || e {
-		return true
+	for _, v := range op {
+		if strings.HasPrefix(input, v) {
+			return true
+		}
 	}
 
 	return false
@@ -54,11 +54,20 @@ func Operator(input string) int {
 	return strings.IndexAny(input, o)
 }
 
+// Exit check if user want to turn off the program. (starts with 'x')
+func Exit(input string) bool {
+	if strings.HasPrefix(input, "x") {
+		display.ShowEndPage()
+		return true
+	}
+	return false
+}
+
 // Errors will check error from input
-func Errors() {
+func Errors() bool {
 	// 	1. operator doesn`t exist.
 	//  2. input[0] == "x" -> turn off
 	//  3. unvalid input -> continue;
 	//  4. ...
-	return
+	return false
 }

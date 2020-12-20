@@ -31,9 +31,8 @@ func cal(input string, result float64) float64 {
 		result = result * num
 	case "/":
 		result = result / num
-	// case "%":
-	// 	result = int(num1) % int(num2)
-	// 	fmt.Printf("Detected operator is %s\n", op)
+	case "%":
+		result = result - float64(int(result/num))*num
 	case "^":
 		result = math.Pow(result, num)
 	}
@@ -60,6 +59,8 @@ func saveAndCal(input string, result float64, storage []float64) (float64, []flo
 			result = num1 * num2
 		case "/":
 			result = num1 / num2
+		case "%":
+			result = num1 - float64(int(num1/num2))*num2
 		case "^":
 			result = math.Pow(num1, num2)
 		}
